@@ -32,21 +32,6 @@ class Word2Vec:
     def update_vectors(self, target_word, context_words):
         target_vector = self.word_vectors[target_word]
         for context_word in context_words:
-            context_vector = self.word_vectors[context_word]
-            self.word_vectors[target_word] += context_vector
-            self.word_vectors[context_word] += target_vector
-
-    def get_similar_words(self, word, top_n=5):
-        target_vector = self.word_vectors[word]
-        similarities = defaultdict(float)
-        for other_word, vector in self.word_vectors.items():
-            if other_word != word:
-                similarity = np.dot(target_vector, vector) / (np.linalg.norm(target_vector) * np.linalg.norm(vector))
-                similarities[other_word] = similarity
-        return sorted(similarities, key=similarities.get, reverse=True)[:top_n]
-
-# Sample usage:
-# corpus = [['i', 'love', 'machine', 'learning'], ['machine', 'learning', 'is', 'fun']]
-# model = Word2Vec(corpus)
-# model.train()
-# print(model.get_similar_words('machine'))
+            if context_word in self.word_vectors:
+                # update logic goes here
+                pass
