@@ -25,15 +25,7 @@ def compute_tfidf(corpus):
     tf = compute_tf(corpus)
     idf = compute_idf(corpus)
     tfidf = []
-    for doc_tf in tf:
-        tfidf_doc = {word: tf_val * idf[word] for word, tf_val in doc_tf.items()}
+    for tf_doc in tf:
+        tfidf_doc = {word: tf_doc[word] * idf[word] for word in tf_doc}
         tfidf.append(tfidf_doc)
     return tfidf
-
-def cosine_similarity(vec_a, vec_b):
-    dot_product = sum(a * b for a, b in zip(vec_a, vec_b))
-    norm_a = sum(a ** 2 for a in vec_a) ** 0.5
-    norm_b = sum(b ** 2 for b in vec_b) ** 0.5
-    if norm_a == 0 or norm_b == 0:
-        return 0
-    return dot_product / (norm_a * norm_b)
