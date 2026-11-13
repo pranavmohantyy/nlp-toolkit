@@ -33,5 +33,5 @@ class Rake:
     def extract_keywords(self, text):
         phrases = self._generate_candidate_keywords(text)
         word_scores = self._calculate_word_scores(phrases)
-        sorted_keywords = sorted(word_scores.items(), key=lambda item: item[1], reverse=True)
-        return sorted_keywords
+        sorted_keywords = sorted(word_scores.items(), key=lambda x: x[1], reverse=True)
+        return [keyword for keyword, score in sorted_keywords]
